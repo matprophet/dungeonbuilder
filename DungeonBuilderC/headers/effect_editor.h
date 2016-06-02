@@ -1,4 +1,5 @@
-#pragma once
+#ifndef EFFECT_EDITOR
+#define EFFECT_EDITOR
 
 #include <map>
 #include "dungeon_data.h"
@@ -6,13 +7,15 @@
 
 
 using namespace std;
+extern int  EFFECTS_LEN;
+extern string EFFECTS[3];
 
-struct ObjectEditor
+struct EffectEditor
 {
-	typedef string (ObjectEditor::*commandFunction) (vector<string>);			
+	typedef string (EffectEditor::*commandFunction) (vector<string>);			
 	map<string,commandFunction> cmdMap;
 
-	DungeonObject *object;
+	DungeonEffect* effect;
 
 	WINDOW *responseWindow;
 	WINDOW *commandWindow;
@@ -24,12 +27,16 @@ struct ObjectEditor
 	
 	void clearWindows();
 	void resetWindows();
-	void load(DungeonObject *object);
+	void load(DungeonEffect *_effect);
 
 	string edit(vector<string> args);
 	string exit(vector<string> args);
 	string add(vector<string> args);
 	string set(vector<string> args);
 	string del(vector<string> args);
+	string larrow(vector<string> args);
+	string rarrow(vector<string> args);
+
 };
 
+#endif

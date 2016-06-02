@@ -21,8 +21,8 @@ bool isVowel(char c);
 string a_an (string s);
 bool isAffirmative(string s);
 string thereIsA(string thing);
-DungeonEntity* extractEntity(void* _entities ,string *userInput);
-DungeonObject* extractObject(vector<DungeonObject*> * objects,string *userInput);
+DungeonEntity* extractEntity(void* _entities ,string *userInput, int *matchedName = nullptr);
+DungeonObject* extractObject(vector<DungeonObject*> * objects,string *userInput, int* matchedName = nullptr);
 DungeonObject* extractAndRemoveObject(vector<DungeonObject*> * objects,string *userInput);
 void removePointer(void * _pointers,void* pointer);
 bool removeStr(vector<string> *strs,string str);
@@ -30,5 +30,6 @@ void strlensort(vector<string>* v);
 void entitysort(vector<DungeonEntity*> *v);
 string extractPhrase(vector<string> phrasesToFind, string *userInput);
 void dbsleep(unsigned int milliseconds);
-
+int min(int a, int b);
+int max(int a, int b);
 #endif

@@ -1,14 +1,11 @@
 
 #include "object_editor.h"
-#include <string>
-#include <sstream>
-#include <algorithm>
-#include <iostream>
 #include "command_window.h"
 #include "text_editor.h"
 #include "printutils.h"
 #include "utils.h"
 #include "string_constants.h"
+#include "action_editor.h"
 
 using namespace std;
 
@@ -196,7 +193,8 @@ string ObjectEditor::add(vector<string> args)
 		action->setPrimaryName(actionStr);
 		action->parent = object;
 		object->actions.push_back(action);
-		
+		ActionEditor ae;
+		ae.load(action);
 	}
 	else if(addNoun == STR_NAME)
 	{

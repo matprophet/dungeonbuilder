@@ -14,7 +14,7 @@ struct DungeonObject;
 struct DungeonCreature;
 struct DungeonRoom;
 struct DungeonPlayer;
-
+struct DungeonAction;
 
 
 extern vector<DungeonRoom*> g_roomList;
@@ -38,35 +38,25 @@ public:
 	bool removeName(string name);
 };
 
-enum class EFFECT_TYPE
-{
-	HEAL,
-	DAMAGE,
-	TELEPORT,
-	TEXT,
-	CREATE_OBJECT,
-	CREATE_CREATURE,
-	REMOVE,
-	SHRINK,
-	GROW,
-	LIGHTER,
-	HEAVIER,
-	CHANGE,
-	NONE,
-	NOT_ALLOWED
-};
 
-
-struct DungeonEffect: DungeonEntity
+struct DungeonEffect
 {
-	EFFECT_TYPE type;
-	DungeonPlayer *player;
+	DungeonEffect();
+	~DungeonEffect();
+
+	
+	DungeonAction *parent;
+	int type;
 	string output;
-	void apply();
+	int magnitude;
+	void apply(DungeonPlayer* player);
+	static string typeToString(int type);
+	string getName();
 };
 
 struct DungeonAction : DungeonEntity
 {
+	string output;
 	vector<DungeonEffect*> effects;
 };
 
@@ -143,9 +133,12 @@ struct DungeonPlayer: DungeonEntity
 
 	vector<string> description;
 	int hitpoints;
+	int maxhitpoints;
 	int score;
 	vector<DungeonObject*> objects;
 	DungeonRoom* location;
+
+	void heal(int amount);
 };
 
 struct DungeonCreature: DungeonEntity
